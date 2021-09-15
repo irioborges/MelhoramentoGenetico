@@ -6,23 +6,28 @@ coberturas_restantes = []
 for i in range(3):
     combinacao.append( [0] * 3)
 
-def gera_combinacoes_recursivo(vaca, coberturas):
+def gera_combinacoes_recursivo(vaca, coberturas, touro):
     if vaca == 0:
         return
     
-    coberta = False
-    i = 0
-    while (i < num_touros):
-        x = 0
-        if coberturas_restantes[x] > 0 and coberta == False:
-            combinacao[vaca - 1][x] = 1
-            coberturas_restantes[x] -= 1
-            coberta = True
-            i = 3
-        i = i + 1
-        x += x
+    if coberturas_restantes[touro] > 0:
+        combinacao[vaca - 1][x] = 1
+    else:
+        return
+    
+    if vaca > 0:
+        coberturas_restantes[x] -= 1
+        return gera_combinacoes_recursivo(vaca - 1, coberturas_restantes, touro)
+    else:
+        print("    T1 T2 T3")
+        print("v1", combinacao[2])
+        print("v2", combinacao[1])
+        print("v3", combinacao[0])
+        return gera_combinacoes_recursivo(vaca, coberturas_restantes, touro)
+    
+   
         
-    return gera_combinacoes_recursivo(vaca - 1, coberturas_restantes)
+    
 
 def gera_solucoes_iterativo(coberturas):
     combinacao = []
@@ -115,12 +120,12 @@ if __name__ == "__main__":
 #gera_solucoes(Touros, Vacas, x-1)
 #gera_solucoes_iterativo(coberturas_restantes)
 
-gera_combinacoes_recursivo(3, coberturas_restantes)
-print("    T1 T2 T3")
-print("v1", combinacao[2])
-print("v2", combinacao[1])
-print("v3", combinacao[0])
-print(coberturas_restantes)
+gera_combinacoes_recursivo(3, coberturas_restantes, 1)
+#print("    T1 T2 T3")
+#print("v1", combinacao[2])
+#print("v2", combinacao[1])
+#print("v3", combinacao[0])
+#print(coberturas_restantes)
 
 #gera_combinacoes_recursivo(3, coberturas_restantes)
 
